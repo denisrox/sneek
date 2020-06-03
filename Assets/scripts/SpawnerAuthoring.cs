@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using System.Collections.Generic;
 using UnityEngine;
-
+//TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 //Конвертация префаба из GameObject в Entity на лету
 public class SpawnerAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertGameObjectToEntity
 {
