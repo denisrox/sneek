@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+///  Ублюдок, мать твою, а ну иди сюда, говно собачье, решил ко мне лезть?
+/// </summary>
 public class TestScript : MonoBehaviour
 {
     // Start is called before the first frame update
