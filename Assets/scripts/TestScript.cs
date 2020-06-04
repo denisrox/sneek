@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 ///  Ублюдок, мать твою, а ну иди сюда, говно собачье, решил ко мне лезть?
+//Prived krasavchik, ia krevedko
 /// </summary>
 public class TestScript : MonoBehaviour
 {
