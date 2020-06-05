@@ -3,7 +3,8 @@ using Unity.Mathematics;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Entities;
-
+using Unity.Transforms;
+using Unity.Mathematics;
 
 [AlwaysSynchronizeSystem] //Засинкать тут же все изменения "на горячую"
 public class MoveSystem : JobComponentSystem
@@ -13,16 +14,13 @@ public class MoveSystem : JobComponentSystem
     {
         float deltaTime = Time.DeltaTime;
         //переменная, фиксирующая нажатия wasd
-        float2 curInput = new float2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         //перебор всех entity, которые содержит vel из MoveComponent
-        Entities.ForEach((ref PhysicsVelocity vel, in MoveComponent moveComponent) =>
-        {   
-            //Текущие значения координат
-            float2 newVel = vel.Linear.xz; 
-            //Новые значения координат
-            newVel += curInput * moveComponent.speed * deltaTime; 
-            //Обновление координат
-            vel.Linear.xz = newVel; 
+        Entities.ForEach((ref Rotation rotation, ref PhysicsVelocity vel, in MoveComponent moveComponent) =>
+        {
+            float3 forwardVector = math.mul(rotation.Value, new float3(0, 0, 1));
+            vel.Linear.xyz += forwardVector * deltaTime * moveComponent.speed;
+            
+
         }).Run();
 
         return default;
