@@ -18,9 +18,9 @@ public class PlayerRotateSystem : JobComponentSystem
         Entities.ForEach((ref Rotation rotation, in PlayerRotateComponent playerRotateSpeed) =>
         {
             if(Input.GetKey(playerRotateSpeed.right))
-                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(math.radians(playerRotateSpeed.speed + deltaTime)));
+                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(math.radians(playerRotateSpeed.speed * deltaTime)));
             if(Input.GetKey(playerRotateSpeed.left))
-                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(-math.radians(playerRotateSpeed.speed + deltaTime)));
+                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(-math.radians(playerRotateSpeed.speed * deltaTime)));
             
         }).Run();
 
