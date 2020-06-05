@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         //позиция для спавна мяча
         Translation ballTrans = new Translation
         {
-            Value = new float3(0f, 5f, -5f)
+            Value = new float3(0f, 1f, -5f)
         };
 
         manager.AddComponentData(newBallEntity, ballTrans); //Присвоить позицию нашему новому энтити

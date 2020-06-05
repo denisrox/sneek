@@ -17,9 +17,9 @@ public class PlayerRotateSystem : JobComponentSystem
         //перебор всех entity, которые содержит vel из RotateComponent
         Entities.ForEach((ref Rotation rotation, in PlayerRotateComponent playerRotateSpeed) =>
         {
-            if(curInput.x>0)
+            if(Input.GetKey(playerRotateSpeed.right))
                 rotation.Value = math.mul(rotation.Value, quaternion.RotateY(math.radians(playerRotateSpeed.speed + deltaTime)));
-            else if(curInput.x<0)
+            if(Input.GetKey(playerRotateSpeed.left))
                 rotation.Value = math.mul(rotation.Value, quaternion.RotateY(-math.radians(playerRotateSpeed.speed + deltaTime)));
             
         }).Run();
