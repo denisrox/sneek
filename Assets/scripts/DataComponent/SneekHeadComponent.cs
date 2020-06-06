@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [GenerateAuthoringComponent]
-public struct PlayerRotateComponent : IComponentData
+public struct SneekHeadComponent : IComponentData
 {
     public float speed;
     public KeyCode left;

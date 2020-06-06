@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [GenerateAuthoringComponent]
-public struct targetForBodyComponent : IComponentData
+public struct SneekBodyComponent : IComponentData
 {
     public Entity target;
 }

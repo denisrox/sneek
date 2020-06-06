@@ -120,16 +120,16 @@ public class GameManager : MonoBehaviour
         
         Translation newTransBall = manager.GetComponentData<Translation>(LastCreatingBallEntityPrefab);
         Rotation newRotBall= manager.GetComponentData<Rotation>(LastCreatingBallEntityPrefab);
-        float3 forwardVector = math.mul(newRotBall.Value, new float3(0, 0, -2));
+        float3 forwardVector = math.mul(newRotBall.Value, new float3(0, 0, -2)); //нужно переделать, так как они неправильно спавнятся. Оси не те
         Translation ballBodyTrans = new Translation();
         ballBodyTrans.Value = newTransBall.Value + forwardVector;
 
 
         //ballBodyTrans
         manager.AddComponentData(newballBodyEntityPrefab, ballBodyTrans);
-        targetForBodyComponent target = new targetForBodyComponent();
-        target.target = newballBodyEntityPrefab;
-        manager.SetComponentData<targetForBodyComponent>(newballBodyEntityPrefab, target);
+        SneekBodyComponent target = new SneekBodyComponent();
+        target.target = LastCreatingBallEntityPrefab;
+        manager.SetComponentData<SneekBodyComponent>(newballBodyEntityPrefab, target);
         
         LastCreatingBallEntityPrefab = newballBodyEntityPrefab;
     }
