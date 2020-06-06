@@ -12,7 +12,6 @@ public class MoveSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps) 
     {
         float deltaTime = Time.DeltaTime;
-        //переменная, фиксирующая нажатия wasd
         //перебор всех entity, которые содержит vel из MoveComponent
         Entities.ForEach((ref Rotation rotation,ref Translation translation, in MoveComponent moveComponent) =>
         {
@@ -22,6 +21,7 @@ public class MoveSystem : JobComponentSystem
         }).Run();
 
         return default;
+
     }
 
 

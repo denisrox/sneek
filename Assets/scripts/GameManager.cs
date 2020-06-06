@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject ballPrefab; //шарик
     public GameObject capsulePrefab; //капсулы
+    public GameObject ballbodyPrefab;//тело змеи
     //public GameObject plane;
     public Text scoreText;
     public Text existText;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     private int curExist;
     private Entity ballEntityPrefab; //MoveComponent
     private Entity capsuleEntityPrefab; //RotateComponent
+    private Entity ballBodyEntityPrefab;
+    private Entity LastCreatingBallEntityPrefab; //последняя созданная часть змеи (в старте это голова, потом уже части тела)
     //private Entity planeEntity; //Поверхность
     private EntityManager manager;
     private BlobAssetStore blobAssetStore;
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
         ballEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(ballPrefab, settings);
         capsuleEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(capsulePrefab, settings);        
+        ballBodyEntityPrefab= GameObjectConversionUtility.ConvertGameObjectHierarchy(ballbodyPrefab, settings);
     }
 
     private void OnDestroy()
@@ -90,6 +94,8 @@ public class GameManager : MonoBehaviour
         };
 
         manager.AddComponentData(newBallEntity, ballTrans); //Присвоить позицию нашему новому энтити
+        LastCreatingBallEntityPrefab = newBallEntity;
+        
         CameraFollow.instanse.ballEntity = newBallEntity; //ссылка на энтити мяча для камеры
     }
 
@@ -107,4 +113,25 @@ public class GameManager : MonoBehaviour
         };
         manager.AddComponentData(newCapsuleEntity, capsuleTrans);
     }
+
+    public void NewBallBody()
+    {
+        Entity newballBodyEntityPrefab = manager.Instantiate(ballBodyEntityPrefab);
+        
+        Translation newTransBall = manager.GetComponentData<Translation>(LastCreatingBallEntityPrefab);
+        Rotation newRotBall= manager.GetComponentData<Rotation>(LastCreatingBallEntityPrefab);
+        float3 forwardVector = math.mul(newRotBall.Value, new float3(0, 0, -2)); //нужно переделать, так как они неправильно спавнятся. Оси не те
+        Translation ballBodyTrans = new Translation();
+        ballBodyTrans.Value = newTransBall.Value + forwardVector;
+
+
+        //ballBodyTrans
+        manager.AddComponentData(newballBodyEntityPrefab, ballBodyTrans);
+        SneekBodyComponent target = new SneekBodyComponent();
+        target.target = LastCreatingBallEntityPrefab;
+        manager.SetComponentData<SneekBodyComponent>(newballBodyEntityPrefab, target);
+        
+        LastCreatingBallEntityPrefab = newballBodyEntityPrefab;
+    }
+
 }
