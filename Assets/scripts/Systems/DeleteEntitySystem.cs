@@ -19,11 +19,13 @@ public class DeleteEntitySystem : JobComponentSystem
             .ForEach((Entity entity) =>
             {
                 GameManager.instanse.IncreaseScore();
-                commandBuffer.DestroyEntity(entity);                
+                commandBuffer.DestroyEntity(entity);
+                //GameManager.instanse.NewBallBody();
             }).Run();
 
         commandBuffer.Playback(EntityManager);
         commandBuffer.Dispose();
+        GameManager.instanse.NewBallBody();
 
         return default;
     }

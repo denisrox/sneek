@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Color: {r: 0.08615167, g: 0.8301887, b: 0.8009069, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1103,6 +1104,7 @@ MonoBehaviour:
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1159,6 +1161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 4404553441334741331, guid: 19276ddd7262b1e4ebddc2a95bd2d3ba, type: 3}
   capsulePrefab: {fileID: 8644580387761241337, guid: dbdc29b2375e9ab4391183823028f6db, type: 3}
+  ballbodyPrefab: {fileID: 5196803075747785789, guid: e98bec400b4824c4fb6fadd4bd07b359, type: 3}
   scoreText: {fileID: 957477464}
   existText: {fileID: 1340980799}
 --- !u!4 &1498328093

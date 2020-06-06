@@ -5,28 +5,21 @@ using Unity.Entities;
 using Unity.Transforms;
 
 [AlwaysSynchronizeSystem] //Засинкать тут же все изменения "на горячую"
-public class PlayerRotateSystem : JobComponentSystem
+public class RotateSneekBodySystem : JobComponentSystem
 {
     // Start is called before the first frame update
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float deltaTime = Time.DeltaTime;
         //перебор всех entity, которые содержит vel из RotateComponent
-        Entities.ForEach((ref Rotation rotation, in PlayerRotateComponent playerRotateSpeed) =>
+        Entities.ForEach((ref Rotation rotation, in targetForBodyComponent target) =>
         {
-            if(Input.GetKey(playerRotateSpeed.right))
-                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(math.radians(playerRotateSpeed.speed * deltaTime)));
-            if(Input.GetKey(playerRotateSpeed.left))
-                rotation.Value = math.mul(rotation.Value, quaternion.RotateY(-math.radians(playerRotateSpeed.speed * deltaTime)));
-            
+            //rotation.Value = math.mul(rotation.Value, quaternion.RotateY(-math.radians(targetForBodyComponent.speed * deltaTime)));
+            //Quaternion.LookRotation(target)
+            //EntityManager manager;
+            //Quaternion.LookRotation(manager.GetComponentData<Translation>(target.target));
         }).Run();
 
         return default;
     }
 }
-
-
-
-
-
-
